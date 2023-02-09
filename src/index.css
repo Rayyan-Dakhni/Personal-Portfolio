@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.accordion {
+    transition: max-height 0.3s ease-out;
+  }
