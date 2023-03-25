@@ -11,10 +11,24 @@ const Accordion = (props) => {
             accordion.classList.remove("max-h-0");
             accordion.classList.add("max-h-full");
             e.target.firstChild.classList.add("rotate-90");
+
+            if (props.icon) {
+              e.target.classList.remove("bg-primary");
+              e.target.classList.add("bg-violet-500");
+              e.target.classList.remove("hover:bg-gray-800");
+              e.target.classList.add("hover:bg-violet-500");
+            }
           } else {
             accordion.classList.remove("max-h-full");
             accordion.classList.add("max-h-0");
             e.target.firstChild.classList.remove("rotate-90");
+
+            if (props.icon) {
+              e.target.classList.remove("bg-violet-500");
+              e.target.classList.add("bg-primary");
+              e.target.classList.remove("hover:bg-violet-500");
+              e.target.classList.add("hover:bg-gray-800");
+            }
           }
         }}
         className='w-full flex p-1 uppercase text-xs font-semibold bg-primary text-left text-gray-100 transition-all hover:bg-gray-800'
@@ -34,7 +48,9 @@ const Accordion = (props) => {
 
       <div
         id={props.id}
-        className='w-full px-3 accordion duration-300 overflow-hidden max-h-0'
+        className={`w-full px-3 ${
+          props.icon ? "" : "accordion"
+        } overflow-hidden max-h-0`}
       >
         {props.children}
       </div>

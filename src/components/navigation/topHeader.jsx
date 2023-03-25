@@ -10,7 +10,7 @@ const TopHeader = (props) => {
       </div>
 
       <p className='float-right text-xs text-white'>
-        Rayyan Dakhni - Software Engineer
+        Copyright © 2023 Rayyan.Dev
       </p>
     </div>
   );

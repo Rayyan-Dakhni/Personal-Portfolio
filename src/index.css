@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .accordion {
-    transition: max-height 0.3s ease-out;
-  }
+  transition: max-height 0.3s ease-out;
+}

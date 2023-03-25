@@ -1,10 +1,31 @@
+import { useRef, useState } from "react";
+
 const Terminal = (props) => {
+  const nameInput = useRef();
+  const introInput = useRef();
+
+  const [name, setName] = useState("");
+  const [intro, setIntro] = useState("");
+
+  const HandleTerminalInput = (e) => {
+    e.target.style.width = (e.target.value.length + 1) * 8.7 + "px";
+  };
+
+  const onNameFormSubmit = (e) => {
+    e.preventDefault();
+
+    e.target.getElementsByTagName("span")[0].classList.add("hidden");
+
+    const nextLine = document.getElementById("def-intro");
+    nextLine.parentElement.classList.remove("hidden");
+  };
+
   return (
-    <div className='absolute w-full h-40 bg-primary border border-[#282B3C] left-0 bottom-0 text-gray-200'>
+    <div className='absolute w-full h-48 bg-primary border border-[#282B3C] left-0 bottom-0 text-gray-200'>
       <div className='grid grid-cols-2 px-3'>
         <div className='text-left'>
           <button className='uppercase w-auto text-gray-50 text-xs border-b border-indigo-500 p-2'>
-            Contact Information
+            Terminal
           </button>
         </div>
 
@@ -14,44 +35,46 @@ const Terminal = (props) => {
       </div>
 
       <div className='text-sm font-mono px-3 text-gray-300 mt-2'>
-        <p>
-          Email:{" "}
-          <a
-            href='mailto:rayyand62@gmail.com'
-            className='text-blue-400 underline'
+        <form onSubmit={onNameFormSubmit}>
+          <label
+            htmlFor='name-input'
+            className='w-full relative cursor-pointer group'
           >
-            rayyand62@gmail.com
-          </a>
-        </p>
-        <p>
-          Phone:{" "}
-          <a
-            href='mailto:rayyand62@gmail.com'
-            className='text-blue-400 underline'
+            Hi, What's your name?
+            <input
+              id='name-input'
+              ref={nameInput}
+              type='text'
+              className='w-[10px] ml-0.5 caret-transparent bg-inherit terminal-input cursor-pointe outline-none'
+              onChange={(e) => {
+                HandleTerminalInput(e);
+                setName(e.target.value);
+              }}
+            />
+            <span className='absolute right-0 bottom-0 w-2 h-full bg-gray-50'></span>
+          </label>
+        </form>
+
+        <form onSubmit={() => {}}>
+          <label
+            htmlFor='def-intro'
+            className='w-full relative cursor-pointer group transition-all hidden'
           >
-            +92-3312221445
-          </a>
-        </p>
-        <p>
-          Linkedin:{" "}
-          <a
-            href='https://linkedin.com/in/rayyan-dakhni'
-            className='text-blue-400 underline'
-            target='_blank'
-          >
-            https://linkedin.com/in/rayyan-dakhni
-          </a>
-        </p>
-        <p>
-          Github:{" "}
-          <a
-            href='https://github.com/Rayyan-Dakhni'
-            className='text-blue-400 underline'
-            target='_blank'
-          >
-            https://github.com/Rayyan-Dakhni
-          </a>
-        </p>
+            <span className='capitalize'>{name}</span>, would you like to
+            continue with the default introduction?
+            <input
+              id='def-intro'
+              ref={introInput}
+              type='text'
+              className='w-[10px] ml-0.5 caret-transparent bg-inherit terminal-input cursor-pointe outline-none'
+              onChange={(e) => {
+                HandleTerminalInput(e);
+                setIntro(e.target.value);
+              }}
+            />
+            <span className='absolute right-0 bottom-0 w-2 h-full bg-gray-50 caret-custom visible'></span>
+          </label>
+        </form>
       </div>
     </div>
   );
